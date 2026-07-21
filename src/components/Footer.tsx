@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer id="contacto" className="scroll-mt-16 bg-surface">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-3">
-        <div>
+        <div data-reveal>
           <p className="text-lg font-bold">
             {site.name.split(" ")[0]}
             <span className="text-accent"> {site.name.split(" ")[1]}</span>

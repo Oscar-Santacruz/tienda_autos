@@ -19,7 +19,7 @@ export function Historia() {
   return (
     <section id="historia" className="scroll-mt-16 border-b border-border">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
-        <div>
+        <div data-reveal>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Quiénes somos
           </h2>
@@ -34,7 +34,7 @@ export function Historia() {
             tomamos tu vehículo en consignación y gestionamos la venta por vos.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4" data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
           <Stat value={site.stats.brands} label="disponibles" />
           <Stat value="0km y usados" label="en stock" />
           <Stat value={site.stats.followers} label="seguidores en Instagram" />
@@ -58,7 +58,7 @@ export function Consignar() {
   return (
     <section id="consignar" className="scroll-mt-16 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <div className="rounded-3xl border border-border bg-gradient-to-br from-surface to-background p-8 sm:p-12">
+        <div data-reveal className="rounded-3xl border border-border bg-gradient-to-br from-surface to-background p-8 sm:p-12">
           <h2 className="max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
             ¿Querés vender tu auto? Consignalo con nosotros
           </h2>
@@ -84,13 +84,15 @@ export function Resenas() {
   return (
     <section id="resenas" className="scroll-mt-16 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 data-reveal className="text-3xl font-bold tracking-tight sm:text-4xl">
           Lo que dicen nuestros clientes
         </h2>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {RESENAS.map((r) => (
+          {RESENAS.map((r, i) => (
             <figure
               key={r.name}
+              data-reveal
+              style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}
               className="rounded-2xl border border-border bg-surface p-6"
             >
               <div className="text-accent">★★★★★</div>

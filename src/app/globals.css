@@ -44,3 +44,145 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* ============================================================
+   Efectos (intro de partículas, cursor custom, reveals)
+   `html.js` la agrega un script inline en el layout antes del
+   primer paint: sin JS nada queda oculto.
+   ============================================================ */
+
+/* --- Cursor custom (solo pointer fine, ver CustomCursor.tsx) --- */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor :is(input, textarea, select) {
+  cursor: auto !important;
+}
+.cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  background: transparent;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    width 0.25s ease,
+    height 0.25s ease,
+    margin 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+  will-change: transform;
+}
+html.cursor-hover .cursor-ring {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-color: rgba(212, 175, 55, 0.95);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* --- Reveal on scroll ([data-reveal] + ScrollReveal.tsx) --- */
+/* La lista de transiciones incluye translate/border/shadow para que los
+   hovers de las cards (que también son [data-reveal]) sigan animando. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease var(--reveal-delay, 0ms),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    translate 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+html.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Entrada escalonada del hero al terminar la intro --- */
+html.js .hero-stagger {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.intro-done .hero-stagger {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Pulso del botón de WhatsApp --- */
+@keyframes wa-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+.wa-pulse {
+  animation: wa-pulse 2.6s ease-out infinite;
+}
+
+/* --- Links de navegación con subrayado dorado que crece --- */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1.5px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* --- Accesibilidad: sin animaciones si el usuario las redujo --- */
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal],
+  html.js .hero-stagger {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .wa-pulse {
+    animation: none;
+  }
+  .intro-overlay {
+    display: none;
+  }
+}

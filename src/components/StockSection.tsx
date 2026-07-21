@@ -14,7 +14,7 @@ export function StockSection({
     <section id="stock" className="scroll-mt-16 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
+          <div data-reveal>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Nuestro stock
             </h2>
@@ -25,7 +25,7 @@ export function StockSection({
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8" data-reveal>
           <Suspense
             fallback={
               <div className="h-24 rounded-2xl border border-border bg-surface" />
@@ -42,8 +42,8 @@ export function StockSection({
           </p>
         ) : (
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {cars.map((car) => (
-              <CarCard key={car.id} car={car} />
+            {cars.map((car, i) => (
+              <CarCard key={car.id} car={car} index={i} />
             ))}
           </div>
         )}

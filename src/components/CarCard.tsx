@@ -3,7 +3,7 @@ import type { Car } from "@/lib/types";
 import { formatKm, formatPrice } from "@/lib/format";
 import { site } from "@/lib/site";
 
-export function CarCard({ car }: { car: Car }) {
+export function CarCard({ car, index = 0 }: { car: Car; index?: number }) {
   const title = `${car.brand} ${car.model}`;
   const waText = encodeURIComponent(
     `Hola! Me interesa el ${title} ${car.year}${
@@ -13,7 +13,11 @@ export function CarCard({ car }: { car: Car }) {
   const waHref = `${site.contact.whatsappUrl}?text=${waText}`;
 
   return (
-    <article className="group overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/50">
+    <article
+      data-reveal
+      style={{ "--reveal-delay": `${(index % 3) * 90}ms` } as React.CSSProperties}
+      className="group overflow-hidden rounded-2xl border border-border bg-surface hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_45px_-20px_rgba(212,175,55,0.35)]"
+    >
       <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
         {car.image_url ? (
           <Image
