@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Tipografía de marca (auto-hospedada en src/app/fonts, sin red en build):
+   - Anton: títulos display condensados en mayúsculas
+   - Playfair Display Italic: palabras acento en serif itálica dorada */
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/anton-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("./fonts/playfair-italic-latin.woff2") format("woff2");
+}
+
 :root {
   --background: #0a0a0a;
   --surface: #121212;
@@ -23,6 +41,40 @@
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: "Anton", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+/* Título display condensado (estilo Sote) */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 0.015em;
+}
+/* Palabra acento en serif itálica dorada dentro de un título display */
+.accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: none;
+  letter-spacing: 0;
+}
+/* Pill de sección (bordecito dorado, texto espaciado en mayúsculas) */
+.section-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 9999px;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 html {
@@ -43,4 +95,190 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ============================================================
+   Efectos (intro de partículas, cursor custom, reveals)
+   `html.js` la agrega un script inline en el layout antes del
+   primer paint: sin JS nada queda oculto.
+   ============================================================ */
+
+/* --- Cursor custom (solo pointer fine, ver CustomCursor.tsx) --- */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor :is(input, textarea, select) {
+  cursor: auto !important;
+}
+.cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  background: transparent;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    width 0.25s ease,
+    height 0.25s ease,
+    margin 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+  will-change: transform;
+}
+html.cursor-hover .cursor-ring {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-color: rgba(212, 175, 55, 0.95);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* --- Reveal on scroll ([data-reveal] + ScrollReveal.tsx) --- */
+/* La lista de transiciones incluye translate/border/shadow para que los
+   hovers de las cards (que también son [data-reveal]) sigan animando. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease var(--reveal-delay, 0ms),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    translate 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+html.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Entrada escalonada del hero al terminar la intro --- */
+html.js .hero-stagger {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.intro-done .hero-stagger {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Pulso del botón de WhatsApp --- */
+@keyframes wa-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+.wa-pulse {
+  animation: wa-pulse 2.6s ease-out infinite;
+}
+
+/* --- Pulso dorado (pill de Chat online) --- */
+@keyframes gold-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+.gold-pulse {
+  animation: gold-pulse 2.6s ease-out infinite;
+}
+
+/* --- Toast de actividad (abajo a la izquierda) --- */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.toast-in {
+  animation: toast-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Links de navegación con subrayado dorado que crece --- */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1.5px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* --- Acordeón FAQ: rotar el "+" al abrir --- */
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item .faq-plus {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-item[open] .faq-plus {
+  transform: rotate(45deg);
+}
+
+/* --- Accesibilidad: sin animaciones si el usuario las redujo --- */
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal],
+  html.js .hero-stagger {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .wa-pulse,
+  .gold-pulse,
+  .toast-in {
+    animation: none;
+  }
+  .intro-overlay {
+    display: none;
+  }
 }

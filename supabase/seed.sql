@@ -1,19 +1,49 @@
--- Datos de ejemplo para la tabla cars.
--- Correr después de la migración 0001_init.sql.
--- (En Supabase: SQL Editor, o `supabase db reset` en local.)
+-- Seed del stock de Prestige Motors (Planilla Junio 2026).
+-- Ejecutar luego de la migración 0001_init.sql.
 
 insert into public.cars
-  (brand, model, version, year, km, price_usd, transmission, fuel, category, color, image_url, featured, status)
+  (brand, model, version, year, km, price, currency, transmission, fuel, category, color, image_url, featured, status)
 values
-  ('Toyota', 'Hilux', 'SRX 2.8 TDI 4x4 AT', 2023, 32000, 48500, 'Automático', 'Diésel', 'Pick-up', 'Gris plata', 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
-  ('Volkswagen', 'Amarok', 'V6 Highline 3.0 TDI 4Motion', 2022, 45000, 42000, 'Automático', 'Diésel', 'Pick-up', 'Negro', 'https://images.unsplash.com/photo-1568844293986-8d0400bd4745?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
-  ('BMW', 'X5', 'xDrive40i M Sport', 2021, 58000, 72000, 'Automático', 'Nafta', 'SUV', 'Blanco', 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
-  ('Audi', 'A4', '2.0 TFSI S line', 2020, 61000, 35000, 'Automático', 'Nafta', 'Sedán', 'Gris', 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
-  ('Ford', 'Mustang', 'GT 5.0 V8', 2019, 40000, 58000, 'Manual', 'Nafta', 'Deportivo', 'Rojo', 'https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
-  ('Chevrolet', 'Onix', '1.0 Turbo Premier AT', 2023, 18000, 19500, 'Automático', 'Nafta', 'Hatchback', 'Azul', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
-  ('Mercedes-Benz', 'GLC', '300 4MATIC AMG Line', 2022, 34000, 68000, 'Automático', 'Nafta', 'SUV', 'Negro', 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
-  ('Volkswagen', 'Golf', 'GTI 2.0 TSI DSG', 2018, 72000, 27000, 'Automático', 'Nafta', 'Hatchback', 'Blanco', 'https://images.unsplash.com/photo-1517672651691-24622a91b550?auto=format&fit=crop&w=1200&q=70', false, 'reservado'),
-  ('Toyota', 'Corolla', '2.0 XEI CVT', 2024, 9000, 31000, 'Automático', 'Nafta', 'Sedán', 'Gris plata', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
-  ('Porsche', '911', 'Carrera S', 2017, 48000, 125000, 'Automático', 'Nafta', 'Deportivo', 'Amarillo', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
-  ('Jeep', 'Compass', '1.3T Longitude AT', 2022, 41000, 33000, 'Automático', 'Nafta', 'SUV', 'Gris', 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
-  ('Ford', 'Ranger', 'Limited 3.2 TDI 4x4 AT', 2021, 55000, 39000, 'Automático', 'Diésel', 'Pick-up', 'Blanco', 'https://images.unsplash.com/photo-1605893477799-b99a3f8f2b98?auto=format&fit=crop&w=1200&q=70', false, 'disponible');
+  ('Toyota', 'Hilux', '4X4 D/C LIMITED 2.8 TDI 6 MT', 2018, 167051, 39999000, 'ARS', 'Manual', 'Diésel', 'Pick-up', 'Bordó', 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Toyota', 'Hilux', '4X4 CD SRX 2.8 177 CV AT', 2026, 0, 85000000, 'ARS', 'Automático', 'Diésel', 'Pick-up', 'Negra', 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Toyota', 'Yaris', 'CROSS SEG CVT 1.5', 2026, 0, 53999000, 'ARS', 'Automático', 'Nafta', 'SUV', 'Azul', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Toyota', 'Etios', 'XLS 1.5 4P AT COLA LARGA', 2019, 119913, 23500000, 'ARS', 'Automático', 'Nafta', 'Sedán', 'Blanco', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'Etios', 'XLS 1.5 AT COLA LARGA', 2019, 46610, 23999000, 'ARS', 'Automático', 'Nafta', 'Sedán', 'Champage', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'Corolla', 'SEG CVT', 2013, 177000, 16999000, 'ARS', 'Automático', 'Nafta', 'Sedán', 'Blanco', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'Corolla', 'XEI MT', 2019, 70000, 26999000, 'ARS', 'Manual', 'Nafta', 'Sedán', 'Gris plata', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'Corolla', 'XEI CVT 2.0', 2022, 83500, 36499000, 'ARS', 'Automático', 'Nafta', 'Sedán', 'Gris plata', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'Corolla', 'CROSS GR-SPORT 2.0 CVT', 2023, 47854, 48999000, 'ARS', 'Automático', 'Nafta', 'SUV', 'Blanco', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'RAV4', 'VX 4X2 AT', 2018, 103607, 38499000, 'ARS', 'Automático', 'Nafta', 'SUV', 'Blanca', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Toyota', 'SW4', 'GR- SPORT AT', 2024, 30700, 89999000, 'ARS', 'Automático', 'Nafta', 'SUV', 'Blanca y negro', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Toyota', 'Yaris', 'XLS PACK CVT', 2024, 27000, 31999000, 'ARS', 'Automático', 'Nafta', 'Hatchback', 'Gris oscuro', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('BMW', 'X4', '28I XDRIVE 2.8', 2018, 58390, 47000, 'USD', 'Automático', 'Nafta', 'SUV', 'Negra', 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Citroën', 'C', 'C-ELYSEE VTI LIVE', 2018, 110234, 14499000, 'ARS', 'Manual', 'Nafta', 'Sedán', 'Gris', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Fiat', 'Palio', 'FIRE COMUN 1.4', 2015, 161000, 12999000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Blanco', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Fiat', 'Mobi', 'TREKKING 1.0', 2026, 0, 29499000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Gris', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Fiat', 'Titano', 'FREEDOM 4X4 AT PLUS AWD 2.2', 2025, 2560, 53999000, 'ARS', 'Automático', 'Diésel', 'Pick-up', 'Blanca', 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Ford', 'Ecosport', 'TITANIUM 1.6 MT', 2013, 177260, 12999000, 'ARS', 'Manual', 'Nafta', 'SUV', 'Gris plata', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Ford', 'Ecosport', 'XLS MT 4X2', 2010, 161384, 10499000, 'ARS', 'Manual', 'Nafta', 'SUV', 'Gris plata', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Ford', 'Ecosport', 'SE 1.6L', 2017, 60000, 15500000, 'ARS', 'Manual', 'Nafta', 'SUV', 'Negra', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Ford', 'Mondeo', 'ECOBOOST', 2018, 122292, 29999000, 'ARS', 'Automático', 'Nafta', 'Sedán', 'Blanco', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Jeep', 'Compass', 'LIMITED AT', 2013, 159000, 17999000, 'ARS', 'Automático', 'Nafta', 'SUV', 'Blanca', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Mercedes Benz', 'A200', 'PROGRESIVE', 2021, 61000, 39999, 'USD', 'Automático', 'Nafta', 'Sedán', 'Gris', 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Mercedes Benz', 'ML', '350 BLUE EFFICIENCY', 2013, 151900, 27500, 'USD', 'Automático', 'Diésel', 'SUV', 'Blanca', 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Nissan', 'New Kicks', 'EXCLUSIVE 1.0T DCT', 2026, 0, 61999000, 'ARS', 'Automático', 'Nafta', 'SUV', 'Blanco', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Peugeot', 'Partner', 'FURGON CONFORT 1.6', 2023, 14500, 25999000, 'ARS', 'Manual', 'Nafta', 'Utilitario', 'Blanca', 'https://images.unsplash.com/photo-1600661653561-629509216228?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Peugeot', '208', 'GT LINE 1.2', 2021, 67000, 29000000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Amarillo', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Renault', 'Duster', 'PH2 PRIVILEGE 1.6', 2015, 0, 17499000, 'ARS', 'Manual', 'Nafta', 'SUV', 'Verde oliva', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Renault', 'Duster', 'PRIVILEGE 2.0', 2017, 149837, null, 'ARS', 'Manual', 'Nafta', 'SUV', 'Gris plata', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Renault', 'Duster', 'EXPRESS 4X2 1.6', 2020, 32890, 23499000, 'ARS', 'Manual', 'Nafta', 'SUV', 'Gris oscuro', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Renault', 'Fluence', 'LUXE PACK', 2015, 143458, 13999000, 'ARS', 'Manual', 'Nafta', 'Sedán', 'Negro', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Renault', 'Kwid', 'ICONIC 1.0 MT BITONO', 2026, 0, 25899000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Gris oscuro', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Renault', 'Logan', 'LIFE 1.6 MT', 2026, 0, 31000000, 'ARS', 'Manual', 'Nafta', 'Sedán', 'Blanco', 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Renault', 'Kangoo II', 'EXPRESS CONFORT 1.6', 2022, 39000, 24999000, 'ARS', 'Manual', 'Nafta', 'Utilitario', 'Blanco', 'https://images.unsplash.com/photo-1600661653561-629509216228?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Renault', 'Kangoo II', 'EXPRESS II 5A 1.6 SCE114 mt', 2026, 0, 41000000, 'ARS', 'Manual', 'Nafta', 'Utilitario', 'Blanco', 'https://images.unsplash.com/photo-1600661653561-629509216228?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Chevrolet', 'Onix', '1.0 T LT MT', 2025, 2781, 28499000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Blanco', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Volkswagen', 'Amarok', 'V6 EXTREME', 2023, 51000, null, 'ARS', 'Automático', 'Diésel', 'Pick-up', 'Gris plata', 'https://images.unsplash.com/photo-1568844293986-8d0400bd4745?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Volkswagen', 'The Beetle', '1.4 MT TSI DESIGN MQ', 2015, 165400, 19999000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Blanco', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Volkswagen', 'Suran', 'HIGHLINE MT 1.6', 2018, 133200, 17999000, 'ARS', 'Manual', 'Nafta', 'Hatchback', 'Rojo', 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Volkswagen', 'Delivery', '9-180', 2026, 0, 59000, 'USD', 'Automático', 'Diésel', 'Camión', 'Blanco', 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=70', true, 'disponible'),
+  ('Honda', 'Crossrunner', '800CC', 2011, 29000, 15000, 'USD', 'Manual', 'Nafta', 'Moto', 'Blanca', 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('BMW', 'S1000', 'XR', 2017, 16000, 21999, 'USD', 'Manual', 'Nafta', 'Moto', 'Roja', 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1200&q=70', false, 'disponible'),
+  ('Sea Doo', 'RXT ISS', '255 CV', 2009, 0, 18500, 'USD', 'Manual', 'Nafta', 'Náutica', 'Amarilla', 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=1200&q=70', false, 'disponible');

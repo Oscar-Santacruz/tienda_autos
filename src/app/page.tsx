@@ -1,10 +1,16 @@
 import { Hero } from "@/components/Hero";
+import { Unidades } from "@/components/Unidades";
 import { StockSection } from "@/components/StockSection";
-import { Historia, Consignar, Resenas } from "@/components/InfoSections";
-import { getCars } from "@/lib/cars";
-import type { CarFilters, Category, Transmission } from "@/lib/types";
+import { Historia, Resenas } from "@/components/InfoSections";
+import { Consignar } from "@/components/Consignar";
+import { Servicios } from "@/components/Servicios";
+import { Faq } from "@/components/Faq";
+import { Ubicacion } from "@/components/Ubicacion";
+import { SocialProofToasts } from "@/components/SocialProofToasts";
+import { getCars, getBrands } from "@/lib/cars";
+import type { CarFilters, Category, Fuel, Transmission } from "@/lib/types";
 
-// La página lee filtros desde la URL (?category=SUV&maxPrice=50000...),
+// La página lee filtros desde la URL (?category=SUV&maxPrice=50000000...),
 // por eso usa `searchParams` (dynamic rendering).
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -20,7 +26,9 @@ function parseFilters(sp: Record<string, string | string[] | undefined>): CarFil
 
   return {
     category: get("category") as Category | undefined,
+    brand: get("brand"),
     transmission: get("transmission") as Transmission | undefined,
+    fuel: get("fuel") as Fuel | undefined,
     maxKm: num("maxKm"),
     minPrice: num("minPrice"),
     maxPrice: num("maxPrice"),
@@ -35,15 +43,26 @@ export default async function Home({
   searchParams: SearchParams;
 }) {
   const filters = parseFilters(await searchParams);
-  const cars = await getCars(filters);
+  const [cars, allCars, brands] = await Promise.all([
+    getCars(filters),
+    getCars(),
+    getBrands(),
+  ]);
+
+  const toastItems = allCars.slice(0, 12).map((c) => `${c.brand} ${c.model}`);
 
   return (
     <>
       <Hero />
-      <StockSection cars={cars} />
+      <Unidades />
+      <StockSection cars={cars} allCars={allCars} brands={brands} />
       <Historia />
-      <Consignar />
       <Resenas />
+      <Consignar />
+      <Servicios />
+      <Faq />
+      <Ubicacion />
+      <SocialProofToasts items={toastItems} />
     </>
   );
 }
