@@ -10,7 +10,7 @@ const UNIDADES = [
     titulo: "Prestige Motors",
     desc: "Nuestra unidad madre. Vehículos 0km y usados de todas las marcas, seleccionados y revisados, con la atención que merece tu próximo auto.",
     bullets: ["Compra · Venta · Permuta", "Todas las marcas", "0km y usados"],
-    img: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=70",
+    img: "/placeholders/unidad-motors.jpg",
   },
   {
     badge: "Consignaciones",
@@ -21,7 +21,7 @@ const UNIDADES = [
       "Exhibición en salón",
       "Gestión y firma incluidas",
     ],
-    img: "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?auto=format&fit=crop&w=1200&q=70",
+    img: "/placeholders/unidad-consignaciones.jpg",
   },
   {
     badge: "Detailing",
@@ -32,7 +32,7 @@ const UNIDADES = [
       "Polarizados y PPF",
       "Chapa, pintura y reparación",
     ],
-    img: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=70",
+    img: "/placeholders/unidad-detailing.jpg",
   },
 ];
 
