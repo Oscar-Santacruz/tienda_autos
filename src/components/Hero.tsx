@@ -14,7 +14,7 @@ export function Hero() {
 
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
         <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-accent">
-          {site.stats.years} años · {site.stats.clients} clientes
+          {site.stats.city} · {site.stats.brands}
         </p>
         <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
           {site.tagline}
@@ -32,14 +32,21 @@ export function Hero() {
             href="#consignar"
             className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
           >
-            Consigná tu auto
+            Consigná tu vehículo
           </a>
         </div>
 
-        <div className="mt-14 flex items-center gap-2 text-sm text-muted">
-          <span className="text-accent">★★★★★</span>
+        <div className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">
           <span>
-            {site.stats.rating} · {site.stats.reviews} reseñas en Google
+            <span className="font-semibold text-foreground">0km y usados</span>{" "}
+            de todas las marcas
+          </span>
+          <span className="hidden sm:inline text-border">•</span>
+          <span>Tomamos consignaciones</span>
+          <span className="hidden sm:inline text-border">•</span>
+          <span>
+            <span className="text-accent">＠</span> {site.stats.followers}{" "}
+            seguidores en Instagram
           </span>
         </div>
       </div>

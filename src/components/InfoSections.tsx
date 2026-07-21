@@ -24,21 +24,21 @@ export function Historia() {
             Quiénes somos
           </h2>
           <p className="mt-6 text-lg text-muted">
-            Desde hace más de {site.stats.years} años conectamos personas con el
-            auto correcto. Empezamos de forma digital y hoy combinamos showroom
-            físico, gestión propia de documentación y una obsesión por el
-            detalle.
+            Somos <span className="text-foreground">Prestige Motors</span>, una
+            concesionaria de {site.stats.city}. Vendemos vehículos 0km y usados
+            de todas las marcas, con atención personalizada y acompañamiento en
+            toda la operación.
           </p>
           <p className="mt-4 text-lg text-muted">
-            Cada unidad se revisa, se fotografía profesionalmente y se publica
-            con información real. Sin sorpresas.
+            Cada unidad se revisa y se publica con información real. También
+            tomamos tu vehículo en consignación y gestionamos la venta por vos.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <Stat value={site.stats.years + " años"} label="de experiencia" />
-          <Stat value={site.stats.clients} label="clientes felices" />
-          <Stat value={site.stats.rating + " ★"} label="rating en Google" />
-          <Stat value="100%" label="gestión incluida" />
+          <Stat value={site.stats.brands} label="disponibles" />
+          <Stat value="0km y usados" label="en stock" />
+          <Stat value={site.stats.followers} label="seguidores en Instagram" />
+          <Stat value="Consignaciones" label="tomamos tu vehículo" />
         </div>
       </div>
     </section>

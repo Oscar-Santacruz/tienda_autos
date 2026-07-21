@@ -11,7 +11,14 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="#top" className="flex items-center gap-2">
-          <span className="text-lg font-bold tracking-tight">
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6 fill-accent"
+            aria-hidden="true"
+          >
+            <path d="M2 8l4 3 6-7 6 7 4-3-2 11H4L2 8zm2.6 9.5h14.8l.28-1.5H4.32l.28 1.5z" />
+          </svg>
+          <span className="text-lg font-bold uppercase tracking-[0.15em]">
             {site.name.split(" ")[0]}
             <span className="text-accent"> {site.name.split(" ")[1]}</span>
           </span>

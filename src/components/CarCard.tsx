@@ -1,12 +1,14 @@
 import Image from "next/image";
 import type { Car } from "@/lib/types";
-import { formatKm, formatUSD } from "@/lib/format";
+import { formatKm, formatPrice } from "@/lib/format";
 import { site } from "@/lib/site";
 
 export function CarCard({ car }: { car: Car }) {
   const title = `${car.brand} ${car.model}`;
   const waText = encodeURIComponent(
-    `Hola! Me interesa el ${title} ${car.year}. ¿Sigue disponible?`,
+    `Hola! Me interesa el ${title} ${car.year}${
+      car.version ? ` (${car.version})` : ""
+    }. ¿Sigue disponible?`,
   );
   const waHref = `${site.contact.whatsappUrl}?text=${waText}`;
 
@@ -47,7 +49,7 @@ export function CarCard({ car }: { car: Car }) {
             )}
           </div>
           <p className="whitespace-nowrap text-lg font-bold text-accent">
-            {formatUSD(car.price_usd)}
+            {formatPrice(car.price, car.currency)}
           </p>
         </div>
 

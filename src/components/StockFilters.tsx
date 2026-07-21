@@ -3,18 +3,31 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-const CATEGORIES = ["SUV", "Sedán", "Pick-up", "Hatchback", "Deportivo", "Clásico"];
+const CATEGORIES = [
+  "SUV",
+  "Sedán",
+  "Pick-up",
+  "Hatchback",
+  "Utilitario",
+  "Camión",
+  "Moto",
+  "Náutica",
+];
+const FUELS = ["Nafta", "Diésel", "Híbrido", "Eléctrico"];
 const KM_OPTIONS = [
+  { label: "0 km", value: "0" },
   { label: "Hasta 20.000 km", value: "20000" },
   { label: "Hasta 50.000 km", value: "50000" },
   { label: "Hasta 100.000 km", value: "100000" },
   { label: "Hasta 150.000 km", value: "150000" },
 ];
+// Rangos en pesos (las unidades en USD se comparan por su equivalente).
 const PRICE_OPTIONS = [
-  { label: "Hasta USD 25.000", value: "25000" },
-  { label: "Hasta USD 50.000", value: "50000" },
-  { label: "Hasta USD 100.000", value: "100000" },
-  { label: "Hasta USD 200.000", value: "200000" },
+  { label: "Hasta $15.000.000", value: "15000000" },
+  { label: "Hasta $25.000.000", value: "25000000" },
+  { label: "Hasta $40.000.000", value: "40000000" },
+  { label: "Hasta $60.000.000", value: "60000000" },
+  { label: "Hasta $90.000.000", value: "90000000" },
 ];
 const SORT_OPTIONS = [
   { label: "Más recientes", value: "recientes" },
@@ -26,7 +39,7 @@ const SORT_OPTIONS = [
 const selectClass =
   "w-full rounded-lg border border-border bg-surface-2 px-3 py-2 text-sm text-foreground focus:border-accent focus:outline-none";
 
-export function StockFilters() {
+export function StockFilters({ brands }: { brands: string[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -40,78 +53,125 @@ export function StockFilters() {
     [router, searchParams],
   );
 
+  const clearAll = useCallback(() => {
+    router.replace("/#stock", { scroll: false });
+  }, [router]);
+
   const val = (k: string) => searchParams.get(k) ?? "";
+  const hasFilters = Array.from(searchParams.keys()).some(
+    (k) => k !== "sort" && (searchParams.get(k) ?? "") !== "",
+  );
 
   return (
-    <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2 lg:grid-cols-5">
-      <input
-        type="search"
-        placeholder="Buscar marca o modelo…"
-        defaultValue={val("query")}
-        onChange={(e) => update("query", e.target.value)}
-        className={selectClass}
-      />
+    <div className="rounded-2xl border border-border bg-surface p-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <input
+          type="search"
+          placeholder="Buscar marca o modelo…"
+          defaultValue={val("query")}
+          onChange={(e) => update("query", e.target.value)}
+          className={`${selectClass} sm:col-span-2 lg:col-span-4`}
+        />
 
-      <select
-        value={val("category")}
-        onChange={(e) => update("category", e.target.value)}
-        className={selectClass}
-      >
-        <option value="">Categoría</option>
-        {CATEGORIES.map((c) => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </select>
+        <select
+          value={val("brand")}
+          onChange={(e) => update("brand", e.target.value)}
+          className={selectClass}
+        >
+          <option value="">Marca</option>
+          {brands.map((b) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
 
-      <select
-        value={val("transmission")}
-        onChange={(e) => update("transmission", e.target.value)}
-        className={selectClass}
-      >
-        <option value="">Transmisión</option>
-        <option value="Automático">Automático</option>
-        <option value="Manual">Manual</option>
-      </select>
+        <select
+          value={val("category")}
+          onChange={(e) => update("category", e.target.value)}
+          className={selectClass}
+        >
+          <option value="">Categoría</option>
+          {CATEGORIES.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
 
-      <select
-        value={val("maxKm")}
-        onChange={(e) => update("maxKm", e.target.value)}
-        className={selectClass}
-      >
-        <option value="">Kilómetros</option>
-        {KM_OPTIONS.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+        <select
+          value={val("fuel")}
+          onChange={(e) => update("fuel", e.target.value)}
+          className={selectClass}
+        >
+          <option value="">Combustible</option>
+          {FUELS.map((f) => (
+            <option key={f} value={f}>
+              {f}
+            </option>
+          ))}
+        </select>
 
-      <select
-        value={val("maxPrice")}
-        onChange={(e) => update("maxPrice", e.target.value)}
-        className={selectClass}
-      >
-        <option value="">Precio</option>
-        {PRICE_OPTIONS.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+        <select
+          value={val("transmission")}
+          onChange={(e) => update("transmission", e.target.value)}
+          className={selectClass}
+        >
+          <option value="">Transmisión</option>
+          <option value="Automático">Automático</option>
+          <option value="Manual">Manual</option>
+        </select>
 
-      <select
-        value={val("sort")}
-        onChange={(e) => update("sort", e.target.value)}
-        className={`${selectClass} sm:col-span-2 lg:col-span-1`}
-      >
-        {SORT_OPTIONS.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
+        <select
+          value={val("maxKm")}
+          onChange={(e) => update("maxKm", e.target.value)}
+          className={selectClass}
+        >
+          <option value="">Kilómetros</option>
+          {KM_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={val("maxPrice")}
+          onChange={(e) => update("maxPrice", e.target.value)}
+          className={selectClass}
+        >
+          <option value="">Precio</option>
+          {PRICE_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={val("sort") || "recientes"}
+          onChange={(e) => update("sort", e.target.value)}
+          className={selectClass}
+        >
+          {SORT_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {hasFilters && (
+        <div className="mt-3 flex justify-end">
+          <button
+            type="button"
+            onClick={clearAll}
+            className="text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
+          >
+            Limpiar filtros
+          </button>
+        </div>
+      )}
     </div>
   );
 }

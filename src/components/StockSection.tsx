@@ -3,7 +3,13 @@ import type { Car } from "@/lib/types";
 import { CarCard } from "./CarCard";
 import { StockFilters } from "./StockFilters";
 
-export function StockSection({ cars }: { cars: Car[] }) {
+export function StockSection({
+  cars,
+  brands,
+}: {
+  cars: Car[];
+  brands: string[];
+}) {
   return (
     <section id="stock" className="scroll-mt-16 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
@@ -25,7 +31,7 @@ export function StockSection({ cars }: { cars: Car[] }) {
               <div className="h-24 rounded-2xl border border-border bg-surface" />
             }
           >
-            <StockFilters />
+            <StockFilters brands={brands} />
           </Suspense>
         </div>
 

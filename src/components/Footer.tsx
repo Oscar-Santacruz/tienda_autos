@@ -29,14 +29,19 @@ export function Footer() {
                 WhatsApp: {site.contact.whatsapp}
               </a>
             </li>
-            <li>
-              <a
-                href={`mailto:${site.contact.email}`}
-                className="hover:text-accent"
-              >
-                {site.contact.email}
-              </a>
+            <li className="text-muted">
+              Ventas: {site.contact.phones.join(" · ")}
             </li>
+            {site.contact.email && (
+              <li>
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="hover:text-accent"
+                >
+                  {site.contact.email}
+                </a>
+              </li>
+            )}
             <li className="text-muted">{site.contact.address}</li>
             <li className="text-muted">{site.contact.hours}</li>
           </ul>
@@ -55,6 +60,16 @@ export function Footer() {
                 className="hover:text-accent"
               >
                 Instagram {site.contact.instagram}
+              </a>
+            </li>
+            <li>
+              <a
+                href={site.contact.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent"
+              >
+                {site.contact.website}
               </a>
             </li>
           </ul>

@@ -1,8 +1,8 @@
 import { Hero } from "@/components/Hero";
 import { StockSection } from "@/components/StockSection";
 import { Historia, Consignar, Resenas } from "@/components/InfoSections";
-import { getCars } from "@/lib/cars";
-import type { CarFilters, Category, Transmission } from "@/lib/types";
+import { getCars, getBrands } from "@/lib/cars";
+import type { CarFilters, Category, Fuel, Transmission } from "@/lib/types";
 
 // La página lee filtros desde la URL (?category=SUV&maxPrice=50000...),
 // por eso usa `searchParams` (dynamic rendering).
@@ -20,7 +20,9 @@ function parseFilters(sp: Record<string, string | string[] | undefined>): CarFil
 
   return {
     category: get("category") as Category | undefined,
+    brand: get("brand"),
     transmission: get("transmission") as Transmission | undefined,
+    fuel: get("fuel") as Fuel | undefined,
     maxKm: num("maxKm"),
     minPrice: num("minPrice"),
     maxPrice: num("maxPrice"),
@@ -35,12 +37,12 @@ export default async function Home({
   searchParams: SearchParams;
 }) {
   const filters = parseFilters(await searchParams);
-  const cars = await getCars(filters);
+  const [cars, brands] = await Promise.all([getCars(filters), getBrands()]);
 
   return (
     <>
       <Hero />
-      <StockSection cars={cars} />
+      <StockSection cars={cars} brands={brands} />
       <Historia />
       <Consignar />
       <Resenas />
