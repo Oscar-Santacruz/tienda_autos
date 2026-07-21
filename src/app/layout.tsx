@@ -6,6 +6,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { IntroParticles } from "@/components/effects/IntroParticles";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
+import { Starfield } from "@/components/effects/Starfield";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -29,9 +30,13 @@ export default function RootLayout({
           }}
         />
         <IntroParticles />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {/* Estrellas de fondo en toda la página; el contenido va en z-10 */}
+        <Starfield />
+        <div className="relative z-10 flex min-h-full flex-1 flex-col">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
         <WhatsAppButton />
         <CustomCursor />
         <ScrollReveal />

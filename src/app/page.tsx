@@ -1,10 +1,16 @@
 import { Hero } from "@/components/Hero";
+import { Unidades } from "@/components/Unidades";
 import { StockSection } from "@/components/StockSection";
-import { Historia, Consignar, Resenas } from "@/components/InfoSections";
+import { Historia, Resenas } from "@/components/InfoSections";
+import { Consignar } from "@/components/Consignar";
+import { Servicios } from "@/components/Servicios";
+import { Faq } from "@/components/Faq";
+import { Ubicacion } from "@/components/Ubicacion";
+import { SocialProofToasts } from "@/components/SocialProofToasts";
 import { getCars, getBrands } from "@/lib/cars";
 import type { CarFilters, Category, Fuel, Transmission } from "@/lib/types";
 
-// La página lee filtros desde la URL (?category=SUV&maxPrice=50000...),
+// La página lee filtros desde la URL (?category=SUV&maxPrice=50000000...),
 // por eso usa `searchParams` (dynamic rendering).
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -37,15 +43,26 @@ export default async function Home({
   searchParams: SearchParams;
 }) {
   const filters = parseFilters(await searchParams);
-  const [cars, brands] = await Promise.all([getCars(filters), getBrands()]);
+  const [cars, allCars, brands] = await Promise.all([
+    getCars(filters),
+    getCars(),
+    getBrands(),
+  ]);
+
+  const toastItems = allCars.slice(0, 12).map((c) => `${c.brand} ${c.model}`);
 
   return (
     <>
       <Hero />
-      <StockSection cars={cars} brands={brands} />
+      <Unidades />
+      <StockSection cars={cars} allCars={allCars} brands={brands} />
       <Historia />
-      <Consignar />
       <Resenas />
+      <Consignar />
+      <Servicios />
+      <Faq />
+      <Ubicacion />
+      <SocialProofToasts items={toastItems} />
     </>
   );
 }

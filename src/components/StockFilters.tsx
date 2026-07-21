@@ -39,7 +39,15 @@ const SORT_OPTIONS = [
 const selectClass =
   "w-full rounded-lg border border-border bg-surface-2 px-3 py-2 text-sm text-foreground focus:border-accent focus:outline-none";
 
-export function StockFilters({ brands }: { brands: string[] }) {
+export function StockFilters({
+  brands,
+  shown,
+  total,
+}: {
+  brands: string[];
+  shown: number;
+  total: number;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -161,17 +169,21 @@ export function StockFilters({ brands }: { brands: string[] }) {
         </select>
       </div>
 
-      {hasFilters && (
-        <div className="mt-3 flex justify-end">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-xs text-muted">
+          Mostrando <span className="font-bold text-foreground">{shown}</span>{" "}
+          de {total} totales
+        </p>
+        {hasFilters && (
           <button
             type="button"
             onClick={clearAll}
-            className="text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
+            className="rounded-full border border-accent/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent transition-colors hover:bg-accent hover:text-black"
           >
-            Limpiar filtros
+            ↺ Limpiar
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

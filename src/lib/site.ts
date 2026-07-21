@@ -10,6 +10,11 @@ export const site = {
     followers: "34 mil",
     brands: "Todas las marcas",
     city: "Formosa, Argentina",
+    // Datos de social proof mostrados en header y reseñas. Editar con los
+    // valores reales del negocio.
+    monthlyVisits: "2.850",
+    rating: "4.9",
+    reviews: "+120",
   },
   contact: {
     // WhatsApp principal (formato internacional para wa.me).
@@ -19,17 +24,34 @@ export const site = {
     phones: ["3704-835319", "3704-988845"],
     email: "" as string,
     address: "España 1085, Formosa, Argentina (3600)",
-    hours: "Lunes a sábado",
+    hours: "Lun a Vie 8:00–12:30 y 16:30–20:30 · Sáb 8:30–12:30",
     instagram: "@prestige_motorsfsa",
     instagramUrl: "https://instagram.com/prestige_motorsfsa",
     website: "prestigemotors.com.ar",
     websiteUrl: "https://prestigemotors.com.ar",
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=Espa%C3%B1a+1085%2C+Formosa%2C+Argentina",
+    googleReviewsUrl:
+      "https://www.google.com/maps/search/?api=1&query=Prestige+Motors+Formosa",
   },
+  // Horarios para el estado Abierto/Cerrado del header (hora de Argentina,
+  // UTC-3). day: 0=domingo … 6=sábado; rangos [desde, hasta] en horas.
+  openingHours: {
+    1: [[8, 12.5], [16.5, 20.5]],
+    2: [[8, 12.5], [16.5, 20.5]],
+    3: [[8, 12.5], [16.5, 20.5]],
+    4: [[8, 12.5], [16.5, 20.5]],
+    5: [[8, 12.5], [16.5, 20.5]],
+    6: [[8.5, 12.5]],
+  } as Record<number, [number, number][]>,
   nav: [
+    { label: "Historia", href: "#historia" },
+    { label: "Unidades", href: "#unidades" },
     { label: "Stock", href: "#stock" },
-    { label: "Nosotros", href: "#historia" },
-    { label: "Consignar", href: "#consignar" },
     { label: "Reseñas", href: "#resenas" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Consignar", href: "#consignar" },
+    { label: "Servicios", href: "#servicios" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Ubicación", href: "#ubicacion" },
   ],
 } as const;
