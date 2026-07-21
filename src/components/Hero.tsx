@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { HeroVideo } from "./HeroVideo";
 
 export function Hero() {
   return (
@@ -6,8 +7,10 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden border-b border-border"
     >
-      {/* Fondo con gradiente premium (las estrellas las pone el Starfield global) */}
+      {/* Fondo: video estilo Sote + overlays para mantener el texto legible */}
       <div className="pointer-events-none absolute inset-0 -z-10">
+        <HeroVideo />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.12),transparent_55%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
       </div>

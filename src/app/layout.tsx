@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="h-full antialiased">
+    <html lang="es" className="h-full antialiased" suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         {/* Marca <html> con .js antes del primer paint: los estados iniciales
             ocultos de los reveals solo aplican si hay JS (ver globals.css). */}
